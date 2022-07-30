@@ -28,6 +28,7 @@ import GoodsList from '@/components/content/goods/GoodsList.vue'
 import DetailBottomBar from './childComps/DetailBottomBar.vue'
 
 export default {
+  name: "Detail",
   components: { 
     DetailNavBar,
     DetailSwiper,
@@ -50,7 +51,7 @@ export default {
       paramInfo: {},
       commentInfo: {},
       recommends: [],
-      themeTopYs: []
+      themeTopYs: [],
     }
   },
   mounted() {
@@ -71,7 +72,9 @@ export default {
 
       //将商品添加到购物车
       // this.$store.commit('addCart',product)
-      this.$store.dispatch('addCart',product)
+      this.$store.dispatch('addCart',product).then(res => {
+        this.$toast.show(res,2000)
+      })
     }
   },
  
@@ -106,7 +109,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #detail {
     position: relative;
     z-index: 9;
